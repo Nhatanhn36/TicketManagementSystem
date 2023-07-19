@@ -26,14 +26,12 @@ public class TicketServiceImpl implements TicketService{
     public Ticket getTicketById(int theId){
         Optional<Ticket> result = ticketRepository.findById(theId);
 
-        Ticket theTicket = null;
         if(result.isPresent()) {
-            theTicket = result.get();
+            return result.get();
         }
         else {
             throw new RuntimeException("Did not find ticket id - " + theId);
         }
-        return theTicket;
     }
 
     @Override

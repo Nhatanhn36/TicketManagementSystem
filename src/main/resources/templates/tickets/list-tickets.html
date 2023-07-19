@@ -18,13 +18,20 @@
         Role(s): <span sec:authentication="principal.authorities"></span>
         <br><br>
     </div>
-    <form th:action="@{/tickets/getTicketById}" class="form-inline">
+    <form th:action="@{/tickets/searchTicketById}" class="form-inline">
         <a th:href="@{/tickets/showFormForAdd}" class="btn btn-primary btn-sm mr-5 mb-3">
             Add Ticket
         </a>
-        <input class="form-control ml-5 mr-ms-2 mb-3" type="search" name="employeeName" placeholder="Search">
+        <input class="form-control ml-5 mr-ms-2 mb-3" type="number" name="ticketId" placeholder="Ticket ID">
         <button class="btn btn-success mb-3" type="submit">Search</button>
     </form>
+<!--    <form th:action="@{/tickets/getTicketById}" class="form-inline">-->
+<!--        <a th:href="@{/tickets/showFormForAdd}" class="btn btn-primary btn-sm mr-5 mb-3">-->
+<!--            Add Ticket-->
+<!--        </a>-->
+<!--        <input class="form-control ml-5 mr-ms-2 mb-3" type="search" name="employeeName" placeholder="Search">-->
+<!--        <button class="btn btn-success mb-3" type="submit">Search</button>-->
+<!--    </form>-->
 
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">

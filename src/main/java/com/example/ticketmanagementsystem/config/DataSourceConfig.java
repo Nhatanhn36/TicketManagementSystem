@@ -1,5 +1,8 @@
 package com.example.ticketmanagementsystem.config;
 
+import com.example.ticketmanagementsystem.dao.UserRepository;
+import com.example.ticketmanagementsystem.service.UserService;
+import com.example.ticketmanagementsystem.service.UserServiceImpl;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
@@ -8,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.sql.DataSource;
 
@@ -19,6 +23,16 @@ public class DataSourceConfig {
     @ConfigurationProperties(prefix = "app.datasource")
     public DataSource appDataSource() {
         return DataSourceBuilder.create().build();
+    }
+
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public UserService userService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        return new UserServiceImpl(userRepository, bCryptPasswordEncoder);
     }
 
     @Bean

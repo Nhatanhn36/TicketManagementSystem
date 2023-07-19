@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -56,12 +57,12 @@ public class TicketController {
         return "redirect:/tickets/list";
     }
 
-//    @GetMapping("/searchTicketById")
-//    public String searchTicketById(@RequestParam("ticketId") int theId, Model theModel) {
-//        List<Ticket> theTicket = ticketService.searchTicketById(theId);
-//
-//        theModel.addAttribute("tickets", theTicket);
-//
-//        return "/tickets/list-tickets";
-//    }
+    @GetMapping("/searchTicketById")
+    public String searchTicketById(@RequestParam("ticketId") int theId, Model theModel) {
+        Ticket theTicket = ticketService.getTicketById(theId);
+
+        theModel.addAttribute("tickets", Collections.singletonList(theTicket));
+
+        return "/tickets/list-tickets";
+    }
 }
